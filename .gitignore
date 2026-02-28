@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Env (do not commit; prod: copy .env on server)
+.env
+.env.*
+!.env.example
