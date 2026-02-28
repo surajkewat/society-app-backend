@@ -1,6 +1,7 @@
 # Local dev: run backend + Postgres with one command.
 # Usage: docker compose up --build
 # API: http://localhost:8080
+# Run migrations from scratch: docker compose down -v && docker compose up --build -d
 
 services:
   app:
