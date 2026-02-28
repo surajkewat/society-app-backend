@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: society-app-backend
+  labels:
+    app: society-app-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: society-app-backend
+  template:
+    metadata:
+      labels:
+        app: society-app-backend
+    spec:
+      containers:
+        - name: app
+          image: society-app-backend:latest   # override for prod: your-registry/society-app-backend:v1
+          imagePullPolicy: IfNotPresent       # use Always in prod when using a registry
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: society-app-secrets
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 5
