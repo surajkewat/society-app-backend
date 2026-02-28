@@ -1,0 +1,32 @@
+# Local dev: run backend + Postgres with one command.
+# Usage: docker compose up --build
+# API: http://localhost:8080
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SERVER_PORT: 8080
+      # When you add DB (Phase 1 migration), uncomment and use:
+      # SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/society_app
+      # SPRING_DATASOURCE_USERNAME: postgres
+      # SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: society_app
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 2s
+      retries: 10

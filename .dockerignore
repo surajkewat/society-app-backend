@@ -1,0 +1,25 @@
+# Build output
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Git
+.git
+.gitignore
+
+# IDE
+.idea
+*.iml
+.vscode
+*.ipr
+*.iws
+.project
+.settings
+.classpath
+.factorypath
+
+# Misc
+*.md
+*.log
+.env
+.env.*
+commit-changes.sh
