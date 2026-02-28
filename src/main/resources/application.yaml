@@ -30,3 +30,4 @@ app:
       expiry-min: ${OTP_EXPIRY_MIN:10}
     sms:
       two-factor-api-key: ${TWO_FACTOR_API_KEY:}
+      two-factor-template-name: ${TWO_FACTOR_TEMPLATE_NAME:}

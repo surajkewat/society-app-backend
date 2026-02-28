@@ -40,9 +40,13 @@ public class AuthProperties {
 
     public static class Sms {
         private String twoFactorApiKey = "";
+        /** Optional: 2Factor approved template name (e.g. Suraksha). URL becomes .../SMS/{phone}/{otp}/{templateName} */
+        private String twoFactorTemplateName = "";
 
         public String getTwoFactorApiKey() { return twoFactorApiKey; }
         public void setTwoFactorApiKey(String twoFactorApiKey) { this.twoFactorApiKey = twoFactorApiKey != null ? twoFactorApiKey : ""; }
+        public String getTwoFactorTemplateName() { return twoFactorTemplateName; }
+        public void setTwoFactorTemplateName(String twoFactorTemplateName) { this.twoFactorTemplateName = twoFactorTemplateName != null ? twoFactorTemplateName : ""; }
 
         public boolean isTwoFactorConfigured() { return twoFactorApiKey != null && !twoFactorApiKey.isBlank(); }
     }

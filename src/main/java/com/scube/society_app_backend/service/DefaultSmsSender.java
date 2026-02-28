@@ -8,8 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
+
 /**
- * Sends OTP via 2Factor.in, or logs only when not configured.
+ * Sends OTP via 2Factor.in SMS API.
+ * Official: POST https://2factor.in/API/V1/{api_key}/SMS/{phone}/{otp} or .../{otp}/{template_name}
  */
 @Component
 public class DefaultSmsSender implements SmsSender {
@@ -42,8 +45,11 @@ public class DefaultSmsSender implements SmsSender {
 
     private void sendVia2Factor(String phone, String code, AuthProperties.Sms sms) {
         String mobile = formatMobileIndia(phone);
-        String url = TWO_FACTOR_BASE + "/" + sms.getTwoFactorApiKey() + "/SMS/" + mobile + "/" + code;
-        ResponseEntity<String> response = restTemplate.postForEntity(url, null, String.class);
+        String path = TWO_FACTOR_BASE + "/" + sms.getTwoFactorApiKey() + "/SMS/" + mobile + "/" + code;
+        if (sms.getTwoFactorTemplateName() != null && !sms.getTwoFactorTemplateName().isBlank()) {
+            path = path + "/" + sms.getTwoFactorTemplateName().trim();
+        }
+        ResponseEntity<String> response = restTemplate.postForEntity(URI.create(path), null, String.class);
         if (response.getStatusCode() != HttpStatus.OK) {
             throw new RuntimeException("2Factor API: status " + response.getStatusCode());
         }
