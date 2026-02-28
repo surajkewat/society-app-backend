@@ -42,21 +42,10 @@ public class DefaultSmsSender implements SmsSender {
 
     private void sendVia2Factor(String phone, String code, AuthProperties.Sms sms) {
         String mobile = formatMobileIndia(phone);
-        String key = sms.getTwoFactorApiKey();
-
-        if (sms.sendSms()) {
-            String url = TWO_FACTOR_BASE + "/" + key + "/SMS/" + mobile + "/" + code;
-            ResponseEntity<String> response = restTemplate.postForEntity(url, null, String.class);
-            if (response.getStatusCode() != HttpStatus.OK) {
-                throw new RuntimeException("2Factor SMS: status " + response.getStatusCode());
-            }
-        }
-        if (sms.sendVoice()) {
-            String url = TWO_FACTOR_BASE + "/" + key + "/VOICE/" + mobile + "/" + code;
-            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-            if (response.getStatusCode() != HttpStatus.OK) {
-                throw new RuntimeException("2Factor Voice: status " + response.getStatusCode());
-            }
+        String url = TWO_FACTOR_BASE + "/" + sms.getTwoFactorApiKey() + "/SMS/" + mobile + "/" + code;
+        ResponseEntity<String> response = restTemplate.postForEntity(url, null, String.class);
+        if (response.getStatusCode() != HttpStatus.OK) {
+            throw new RuntimeException("2Factor API: status " + response.getStatusCode());
         }
     }
 

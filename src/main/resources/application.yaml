@@ -30,5 +30,3 @@ app:
       expiry-min: ${OTP_EXPIRY_MIN:10}
     sms:
       two-factor-api-key: ${TWO_FACTOR_API_KEY:}
-      # Delivery: sms | voice | both (2Factor: SMS = text, voice = call that speaks OTP)
-      delivery: ${OTP_DELIVERY:sms}
