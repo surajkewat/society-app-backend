@@ -40,10 +40,16 @@ public class AuthProperties {
 
     public static class Sms {
         private String twoFactorApiKey = "";
+        /** Delivery: "sms", "voice", or "both". 2Factor SMS = text message, voice = phone call that speaks OTP. */
+        private String delivery = "sms";
 
         public String getTwoFactorApiKey() { return twoFactorApiKey; }
         public void setTwoFactorApiKey(String twoFactorApiKey) { this.twoFactorApiKey = twoFactorApiKey != null ? twoFactorApiKey : ""; }
+        public String getDelivery() { return delivery; }
+        public void setDelivery(String delivery) { this.delivery = delivery != null ? delivery : "sms"; }
 
         public boolean isTwoFactorConfigured() { return twoFactorApiKey != null && !twoFactorApiKey.isBlank(); }
+        public boolean sendSms() { return "sms".equalsIgnoreCase(delivery) || "both".equalsIgnoreCase(delivery); }
+        public boolean sendVoice() { return "voice".equalsIgnoreCase(delivery) || "both".equalsIgnoreCase(delivery); }
     }
 }
