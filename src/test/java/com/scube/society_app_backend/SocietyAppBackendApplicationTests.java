@@ -1,10 +1,10 @@
-package com.scube.society_app_backend_new;
+package com.scube.society_app_backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SocietyAppBackendNewApplicationTests {
+class SocietyAppBackendApplicationTests {
 
 	@Test
 	void contextLoads() {

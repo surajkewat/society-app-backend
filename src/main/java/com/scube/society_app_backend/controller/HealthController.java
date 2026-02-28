@@ -1,4 +1,4 @@
-package com.scube.society_app_backend_new.controller;
+package com.scube.society_app_backend.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class HealthController {
     public ResponseEntity<Map<String, Object>> health() {
         return ResponseEntity.ok(Map.of(
                 "status", "UP",
-                "application", "society-app-backend-new",
+                "application", "society-app-backend",
                 "timestamp", Instant.now().toString()
         ));
     }

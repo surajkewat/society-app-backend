@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.scube</groupId>
-	<artifactId>society-app-backend-new</artifactId>
+	<artifactId>society-app-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>society-app-backend-new</name>
+	<name>society-app-backend</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
